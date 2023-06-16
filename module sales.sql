@@ -1,4 +1,4 @@
-create table special_offer (
+create table sales.special_offer (
 	spof_id serial primary key ,
 	spof_description varchar(256) ,
 	spof_discount int ,
@@ -10,7 +10,7 @@ create table special_offer (
 	spof_cate_id int foreign key//
 )
 
-create table special_offer_programs (
+create table sales.special_offer_programs (
 	soco_id serial primary key ,
 	soco_spof_id serial ,
 	soco_prog_entity_id int ,
@@ -21,15 +21,15 @@ create table special_offer_programs (
 	constraint special_offer_programs_pk primary key(soco_id,soco_spof_id,soco_prog_entity_id)
 )
 
-create table program_entity (
+create table sales.program_entity (
 	prog_entity_id serial primary key ,
 )
 
-create table users (
+create table sales.users (
 	user_entity_id int primary key ,
 )
 
-create table cart_items (
+create table sales.cart_items (
 	cait_id serial primary key ,
 	cait_quantity int ,
 	cait_unit_price money ,
@@ -40,11 +40,11 @@ create table cart_items (
 	foreign key (cait_prog_entity_id) references curriculum.program_entity(prog_entity_id)
 )
 
-create table status (
+create table sales.status (
 	status varchar (15) primary key
 )
 
-create table sales_	order_header (
+create table sales.sales_order_header (
 	sohe_id serial primary key ,
 	sohe_order_date timestamp ,
 	sohe_due_date timestamp ,
@@ -71,7 +71,7 @@ create table sales.sales_order_detail (
 	sode_line_total int ,
 	sode_modified_date timestamp ,
 	sode_sohe_id int ,
-	sode_prog_entity_id int
+	sode_prog_entity_id int ,
 	foreign key (sode_user_entity_id) references users.users(user_entity_id)
 )
 
