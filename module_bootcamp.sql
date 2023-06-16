@@ -29,6 +29,7 @@ CREATE TABLE employee (
 
 -- MODULE BOOTCAMP
 
+-- TABLE PROGRAM APPLY
 CREATE TABLE program_apply (
     prap_user_entity_id INTEGER,
     prap_prog_entity_id INTEGER,
@@ -44,6 +45,7 @@ CREATE TABLE program_apply (
     CONSTRAINT program_apply_pk PRIMARY KEY (prap_user_entity_id, prap_prog_entity_id)
 );
 
+-- TABLE PROGRAM APPLY PROGRESS
 CREATE TABLE program_apply_progress (
     parog_id SERIAL,
     parog_user_entity_id INTEGER,
@@ -61,6 +63,29 @@ CREATE TABLE program_apply_progress (
     CONSTRAINT program_apply_progress_pk PRIMARY KEY (parog_id, parog_user_entity_id, parog_prog_entity_id)
 );
 
+
+-- SEQUENCE dengan rumus pada tabel program_apply_progress
+CREATE SEQUENCE seq_parog_id
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    START 1;
+
+-- Fungsi untuk mengembalikan nilai SEQUENCE dengan format yang diinginkan pada tabel program_apply_progress
+CREATE OR REPLACE FUNCTION get_parog_id() 
+    RETURNS VARCHAR AS $$
+    DECLARE
+        seq_val INTEGER;
+    BEGIN
+        seq_val := nextval('seq_parog_id');
+        RETURN LPAD(seq_val::VARCHAR, 4, '0');
+    END;
+$$ LANGUAGE plpgsql;
+
+-- Mengaitkan fungsi get_parog_id() dengan kolom parog_id pada tabel program_apply_progress
+ALTER TABLE program_apply_progress ALTER COLUMN parog_id SET DEFAULT get_parog_id();
+
+-- TABLE BATCH
 CREATE TABLE batch (
     batch_id SERIAL,
     batch_entity_id INTEGER,
@@ -79,6 +104,28 @@ CREATE TABLE batch (
     CONSTRAINT batch_pk PRIMARY KEY (batch_id, batch_entity_id)
 );
 
+-- SEQUENCE dengan rumus pada tabel batch
+CREATE SEQUENCE seq_batch_id
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    START 1;
+
+-- Fungsi untuk mengembalikan nilai SEQUENCE dengan format yang diinginkan pada tabel batch
+CREATE OR REPLACE FUNCTION get_batch_id() 
+    RETURNS VARCHAR AS $$
+    DECLARE
+        seq_val INTEGER;
+    BEGIN
+        seq_val := nextval('seq_batch_id');
+        RETURN LPAD(seq_val::VARCHAR, 4, '0');
+    END;
+$$ LANGUAGE plpgsql;
+
+-- Mengaitkan fungsi get_batr_id() dengan kolom batr_id pada tabel batch_trainee
+ALTER TABLE batch_trainee ALTER COLUMN batr_id SET DEFAULT get_batr_id();
+
+-- TABLE BATCH TRAINEE
 CREATE TABLE batch_trainee (
     batr_id SERIAL,
     batr_status VARCHAR(15),
@@ -96,6 +143,28 @@ CREATE TABLE batch_trainee (
     CONSTRAINT batch_trainee_pk PRIMARY KEY (batr_id, batr_batch_id)
 );
 
+-- SEQUENCE dengan rumus pada tabel batch_trainee
+CREATE SEQUENCE seq_batr_id
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    START 1;
+
+-- Fungsi untuk mengembalikan nilai SEQUENCE dengan format yang diinginkan pada tabel batch_trainee
+CREATE OR REPLACE FUNCTION get_batr_id() 
+    RETURNS VARCHAR AS $$
+    DECLARE
+        seq_val INTEGER;
+    BEGIN
+        seq_val := nextval('seq_batr_id');
+        RETURN LPAD(seq_val::VARCHAR, 4, '0');
+    END;
+$$ LANGUAGE plpgsql;
+
+-- Mengaitkan fungsi get_batr_id() dengan kolom batr_id pada tabel batch_trainee
+ALTER TABLE batch_trainee ALTER COLUMN batr_id SET DEFAULT get_batr_id();
+
+-- TABLE BATCH TRAINEE EVALUATION
 CREATE TABLE batch_trainee_evaluation (
     btev_id SERIAL PRIMARY KEY,
     btev_type VARCHAR(15),
@@ -112,6 +181,29 @@ CREATE TABLE batch_trainee_evaluation (
     FOREIGN KEY (btev_trainee_entity_id) REFERENCES users(user_entity_id)
 );
 
+-- SEQUENCE dengan rumus pada tabel batch_trainee_evaluation
+CREATE SEQUENCE seq_btev_id
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    START 1;
+
+-- Fungsi untuk mengembalikan nilai SEQUENCE dengan format yang diinginkan pada tabel batch_trainee_evaluation
+CREATE OR REPLACE FUNCTION get_btev_id() 
+    RETURNS VARCHAR AS $$
+    DECLARE
+        seq_val INTEGER;
+    BEGIN
+        seq_val := nextval('seq_btev_id');
+        RETURN LPAD(seq_val::VARCHAR, 4, '0');
+    END;
+$$ LANGUAGE plpgsql;
+
+-- Mengaitkan fungsi get_btev_id() dengan kolom btev_id pada tabel batch_trainee_evaluation
+ALTER TABLE batch_trainee_evaluation
+    ALTER COLUMN btev_id SET DEFAULT get_btev_id();
+
+-- TABLE INSTRUCTOR PROGRAMS
 CREATE TABLE instructor_programs (
     batch_id INTEGER,
     inpro_entity_id INTEGER,
