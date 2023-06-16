@@ -22,11 +22,11 @@ create table sales.special_offer_programs (
 )
 
 create table sales.program_entity (
-	prog_entity_id serial primary key ,
+	prog_entity_id serial primary key 
 )
 
 create table sales.users (
-	user_entity_id int primary key ,
+	user_entity_id int primary key 
 )
 
 create table sales.cart_items (
