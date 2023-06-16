@@ -14,7 +14,7 @@ create table sales.special_offer_programs (
 	soco_id serial primary key ,
 	soco_spof_id serial ,
 	soco_prog_entity_id int ,
-	soco_status varchar (15) ,
+	soco_status varchar (15) CHECK (soco_status in ('open', 'cancelled','closed')) ,
 	soco_modified_date timestamp ,
 	foreign key (soco_spof_id) references special_offer(spof_id) ,
 	foreign key (soco_prog_entity_id) references curriculum.program_entity(prog_entity_id),
@@ -58,7 +58,7 @@ create table sales.sales_order_header (
 	sohe_license_code varchar (512) unique ,
 	sohe_modified_date timestamp ,
 	sohe_user_entity_id int ,
-	sohe_status varchar(15) ,
+	sohe_status varchar(15) (soco_status in ('open', 'shipping', 'cancelled','refund'))  ,
 	foreign key (sohe_user_entity_id) references users.users(user_entity_id),
 	foreign key (sohe_status) references master.status(status)
 )
