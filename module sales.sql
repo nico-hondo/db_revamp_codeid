@@ -58,7 +58,7 @@ create table sales.sales_order_header (
 	sohe_license_code varchar (512) unique ,
 	sohe_modified_date timestamp ,
 	sohe_user_entity_id int ,
-	sohe_status varchar(15) (soco_status in ('open', 'shipping', 'cancelled','refund'))  ,
+	sohe_status varchar(15) CHECK (soco_status in ('open', 'shipping', 'cancelled','refund'))  ,
 	foreign key (sohe_user_entity_id) references users.users(user_entity_id),
 	foreign key (sohe_status) references master.status(status)
 )
