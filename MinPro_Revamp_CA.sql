@@ -5,29 +5,33 @@ CREATE SCHEMA IF NOT EXISTS users;
 CREATE TABLE IF NOT EXISTS users.business_entity (
 	entity_id SERIAL PRIMARY KEY
 );
+SELECT * FROM users.business_entity;
 
 CREATE TABLE IF NOT EXISTS users.users (
 	user_entity_id SERIAL PRIMARY KEY,
 	FOREIGN KEY (user_entity_id) REFERENCES users.business_entity (entity_id)
 );
+SELECT * FROM users.users;
 
 CREATE SCHEMA IF NOT EXISTS payment;
 
 CREATE TABLE payment.bank (
-	bank_entity_id INT PRIMARY KEY,
-	bank_code VARCHAR(10) UNIQUE,
-	bank_name VARCHAR(55) UNIQUE,
-	bank_modified_date TIMESTAMP
-	FOREIGN KEY (bank_entity_id) REFERENCES users.business_entity (entity_id)
+    bank_entity_id INT PRIMARY KEY,
+    bank_code VARCHAR(10) UNIQUE,
+    bank_name VARCHAR(55) UNIQUE,
+    bank_modified_date TIMESTAMP,
+    FOREIGN KEY (bank_entity_id) REFERENCES users.business_entity (entity_id)
 );
+SELECT * FROM payment.bank;
 
 CREATE TABLE payment.fintech (
-	fint_entity_id INT PRIMARY KEY,
-	fint_code VARCHAR(10) UNIQUE,
-	fint_name VARCHAR(55) UNIQUE,
-	fint_modified_date TIMESTAMP
-	FOREIGN KEY (fint_entity_id) REFERENCES users.business_entity (entity_id)
+    fint_entity_id INT PRIMARY KEY,
+    fint_code VARCHAR(10) UNIQUE,
+    fint_name VARCHAR(55) UNIQUE,
+    fint_modified_date TIMESTAMP,
+    FOREIGN KEY (fint_entity_id) REFERENCES users.business_entity (entity_id)
 );
+SELECT * FROM payment.fintech;
 
 CREATE TABLE payment.users_account (
 	usac_bank_entity_id INT,
@@ -44,6 +48,7 @@ CREATE TABLE payment.users_account (
 	FOREIGN KEY (usac_bank_entity_id) REFERENCES payment.fintech (fint_entity_id) ON DELETE CASCADE,
 	FOREIGN KEY (usac_user_entity_id) REFERENCES users.users (user_entity_id)
 );
+SELECT * FROM payment.users_account;
 
 CREATE OR REPLACE FUNCTION set_usac_account_number()
 	RETURNS TRIGGER AS $$
@@ -75,13 +80,14 @@ CREATE TABLE payment.transaction_payment (
 	trpa_debit NUMERIC,
 	trpa_credit NUMERIC,
 	trpa_type VARCHAR(15) CHECK (trpa_type IN ('top-up', 'transfer', 'order', 'refund')),
-	trpa_note VARCHAR(255)
+	trpa_note VARCHAR(255),
 	trpa_modified_date TIMESTAMP,
 	trpa_source_id VARCHAR(25) NOT NULL,
 	trpa_target_id VARCHAR(25) NOT NULL,
 	trpa_user_entity_id INT,
 	FOREIGN KEY (trpa_user_entity_id) REFERENCES users.users (user_entity_id)
 );
+SELECT * FROM payment.transaction_payment;
 
 CREATE SEQUENCE trpa_code_number_seq;
 
@@ -109,6 +115,6 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER trigger_set_trpa_code_and_ids
-	BEFORE INSERT ON transaction_payment
+	BEFORE INSERT ON payment.transaction_payment
 	FOR EACH ROW
-	EXECUTE FUNCTION set_trpa_code_and_ids();
+	EXECUTE FUNCTION set_trpa_code_number();
