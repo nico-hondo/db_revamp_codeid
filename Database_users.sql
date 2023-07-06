@@ -1,33 +1,36 @@
+CREATE TABLE users.business_entity(
+    entity_id SERIAL PRIMARY KEY
+)
+
 create table users.roles(
     role_id serial Primary Key,
     role_name varchar(35) unique,
-    role_type varchar(15),
+    role_type varchar(35),
     role_modified_date timestamp
-)
-
-create table users.users_roles(
-    usro_entity_id integer Primary Key,
-    usro_role_id integer,
-    usro_modified_date timestamp,
-    FOREIGN KEY (usro_entity_id) REFERENCES business_entity(entity_id),
-    FOREIGN KEY (usro_role_id) REFERENCES users.roles(role_id),
-    CONSTRAINT usro_role_id PRIMARY KEY (usro_role_id)
 )
 
 create table users.users(
     user_entity_id integer PRIMARY KEY,
-    user_name varchar(15) UNIQUE,
+    user_name varchar(30) UNIQUE,
     user_password VARCHAR(256),
     user_first_name VARCHAR(50),
     user_last_name VARCHAR(50),
     user_birth_date TIMESTAMP,
     user_email_promotion INTEGER,
-    user_demographic VARCHAR,
+    user_demographic JSON,
     user_modified_date TIMESTAMP,
     user_photo VARCHAR(255),
     user_current_role INTEGER,
     FOREIGN KEY (user_entity_id) REFERENCES business_entity (entity_id),
-    FOREIGN KEY (user_current_role) REFERENCES users.users_roles (usro_role_id)
+    FOREIGN KEY (user_current_role) REFERENCES users.roles (role_id)
+)
+create table users.users_roles(
+    usro_entity_id integer Primary Key,
+    usro_role_id integer,
+    usro_modified_date timestamp,
+    FOREIGN KEY (usro_entity_id) REFERENCES users.users (user_entity_id),
+    FOREIGN KEY (usro_role_id) REFERENCES users.roles(role_id),
+    CONSTRAINT usro_role_id PRIMARY KEY (usro_entity_id, usro_role_id)
 )
 
 CREATE TABLE users.users_experiences(
@@ -37,7 +40,7 @@ CREATE TABLE users.users_experiences(
     usex_profile_headline VARCHAR(512),
     usex_employment_type VARCHAR(15) CHECK (usex_employment_type IN ('fulltime', 'freelance')),
     usex_company_name VARCHAR(255),
-    usex_is_current CHAR (1),
+    usex_is_current CHAR (1) check(usex_is_current in('0', '1')),
     usex_start_date TIMESTAMP,
     usex_end_date TIMESTAMP,
     usex_industry VARCHAR(15),
@@ -50,21 +53,21 @@ CREATE TABLE users.users_experiences(
 )
 
 CREATE TABLE users.users_skill (
-    uski_id SERIAL PRIMARY KEY,
+    uski_id SERIAL UNIQUE,
     uski_entity_id INTEGER ,
     uski_modified_date TIMESTAMP,
-    uski_skty_name VARCHAR(15),
+    uski_skty_name VARCHAR(30) UNIQUE,
     FOREIGN KEY (uski_entity_id) REFERENCES users.users (user_entity_id),
     FOREIGN KEY (uski_skty_name) REFERENCES master.skill_type (skty_name),
-    CONSTRAINT uski_entity_id PRIMARY KEY (uski_entity_id)
+    CONSTRAINT uski_entity_id PRIMARY KEY (uski_id, uski_entity_id)
 )
 
 CREATE TABLE users.users_experiences_skill (
     uesk_usex_id INTEGER,
     uesk_uski_id INTEGER,
-    CONSTRAINT uesk PRIMARY KEY (uesk_usex_id, uesk_uski_id),
     FOREIGN KEY (uesk_usex_id) REFERENCES users.users_experiences (usex_id),
-    FOREIGN KEY (uesk_uski_id) REFERENCES users.users_skill (uski_id)
+    FOREIGN KEY (uesk_uski_id) REFERENCES users.users_skill (uski_id),
+    CONSTRAINT uesk PRIMARY KEY (uesk_usex_id, uesk_uski_id)
 )
 
 CREATE TABLE users.users_license(
@@ -87,20 +90,20 @@ CREATE TABLE users.users_email (
 )
 
 CREATE TABLE users.users_media(
-    usme_id SERIAL PRIMARY KEY,
+    usme_id SERIAL,
     usme_entity_id INTEGER,
     usme_file_link VARCHAR(255),
     usme_filename VARCHAR(55),
     usme_filesize INTEGER,
-    usme_filetype VARCHAR(15) CHECK (usme_filetype IN ('jpg', 'pdf', 'word')),
+    usme_filetype VARCHAR(15) CHECK (usme_filetype IN ('jpg', 'pdf', 'word', 'png')),
     usme_note VARCHAR(55),
     usme_modified_date TIMESTAMP,
-    CONSTRAINT media_id PRIMARY KEY (usme_entity_id),
+    CONSTRAINT media_id PRIMARY KEY (usme_id, usme_entity_id),
     FOREIGN KEY (esme_entity_id) REFERENCES users.users (user_entity_id)
 )
 
 CREATE TABLE users.users_eductaion(
-    usdu_id SERIAL PRIMARY KEY,
+    usdu_id SERIAL,
     usdu_entity_id INTEGER,
     usdu_school VARCHAR(255),
     usdu_degree VARCHAR(15) CHECK (usdy_degree IN ('Bachelor', 'Diploma')),
@@ -112,7 +115,7 @@ CREATE TABLE users.users_eductaion(
     usdu_activities VARCHAR(512),
     usdu_description VARCHAR(512),
     usdu_modified_date TIMESTAMP,
-    CONSTRAINT education PRIMARY KEY (usdu_entity_id),
+    CONSTRAINT education PRIMARY KEY (usdu_id, usdu_entity_id),
     FOREIGN KEY (usdu_entity_id) REFERENCES users.users (user_entity_id)
 )
 
