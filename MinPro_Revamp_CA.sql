@@ -172,4 +172,3 @@ INSERT INTO payment.transaction_payment (trpa_id, trpa_code_number, trpa_order_n
 (3,	20220727#000003, null, null, 10000, 'order', 'bayar shoppe order', null, 131899555, 99999, 3);
 SELECT * FROM payment.transaction_payment;
 
-
