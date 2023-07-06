@@ -1,7 +1,8 @@
 -- MASTER
 
 create table master.status (
-status varchar(15)primary key,
+status varchar(50)primary key,
+status_module varchar(50),
 status_modified_date timestamp
 );
 
@@ -69,7 +70,7 @@ module_name varchar(125)primary key
 
 create table master.route_actions(
 roac_id serial primary key,
-roac_name varchar(15)unique,
+roac_name varchar(30)unique,
 roac_orderby integer,
 roac_display integer,
 roac_module_name varchar(125),
@@ -110,15 +111,245 @@ addr_postal_code varchar(10)unique,
 	foreign key (addr_city_id) references  master.city(city_id)
 );
 
+-- INSERT MASTER
+
+INSERT INTO master.job_role (joro_name) VALUES
+('Pemograman')
+
+INSERT INTO master.category (cate_id, cate_name, cate_cate_id) VALUES ('1', 'Development', null);
+INSERT INTO master.category (cate_id, cate_name, cate_cate_id) VALUES ('2', 'Full Stack', '1');
+INSERT INTO master.category (cate_id, cate_name, cate_cate_id) VALUES ('3', 'Java Technology', '1');
+INSERT INTO master.category (cate_id, cate_name, cate_cate_id) VALUES ('4', '.Net Technology', '1');
+INSERT INTO master.category (cate_id, cate_name, cate_cate_id) VALUES ('5', 'Golang', '1');
+INSERT INTO master.category (cate_id, cate_name, cate_cate_id) VALUES ('6', 'Mobile Development', null);
+INSERT INTO master.category (cate_id, cate_name, cate_cate_id) VALUES ('7', 'Android', '6');
+INSERT INTO master.category (cate_id, cate_name, cate_cate_id) VALUES ('8', 'Flutter', '6');
+INSERT INTO master.category (cate_id, cate_name, cate_cate_id) VALUES ('9', 'React Native', '6');
+INSERT INTO master.category (cate_id, cate_name, cate_cate_id) VALUES ('10', 'Swift', '6');
+INSERT INTO master.category (cate_id, cate_name, cate_cate_id) VALUES ('11', 'Data Scientist', null);
+INSERT INTO master.category (cate_id, cate_name, cate_cate_id) VALUES ('12', 'Hadoop', '11');
+INSERT INTO master.category (cate_id, cate_name, cate_cate_id) VALUES ('13', 'Python', '11');
+
+select * from master.category
+
+INSERT INTO master.skill_type (skty_name) VALUES ('java');
+INSERT INTO master.skill_type (skty_name) VALUES ('dotnet');
+INSERT INTO master.skill_type (skty_name) VALUES ('sql');
+INSERT INTO master.skill_type (skty_name) VALUES ('softskill');
+INSERT INTO master.skill_type (skty_name) VALUES ('hardskill');
+INSERT INTO master.skill_type (skty_name) VALUES ('mini project');
+INSERT INTO master.skill_type (skty_name) VALUES ('javascript');
+INSERT INTO master.skill_type (skty_name) VALUES ('express.js');
+INSERT INTO master.skill_type (skty_name) VALUES ('nodejs');
+INSERT INTO master.skill_type (skty_name) VALUES ('springboot');
+INSERT INTO master.skill_type (skty_name) VALUES ('Final');
+INSERT INTO master.skill_type (skty_name) VALUES ('Presentation');
+INSERT INTO master.skill_type (skty_name) VALUES ('Technical');
+
+
+select * from master.skill_type
+
+INSERT INTO master.modules (module_name) VALUES ('Bootcamp'), ('Job');
+INSERT INTO master.modules (module_name) VALUES ('Sales');
+INSERT INTO master.modules (module_name) VALUES ('Master'), ('User'),('HR'), ('Course'), ('Payment');
+
+
+select * from master.modules
+
+
+INSERT INTO master.route_actions (roac_id, roac_name, roac_orderby, roac_module_name, roac_display) VALUES ('1', 'Apply Application', '1', 'Bootcamp', '1');
+INSERT INTO master.route_actions (roac_id, roac_name, roac_orderby, roac_module_name, roac_display) VALUES ('2', 'Filtering Test', '2', 'Bootcamp', '1');
+INSERT INTO master.route_actions (roac_id, roac_name, roac_orderby, roac_module_name, roac_display) VALUES ('3', 'Contract Legal', '3', 'Bootcamp', '1');
+INSERT INTO master.route_actions (roac_id, roac_name, roac_orderby, roac_module_name, roac_display) VALUES ('4', 'Briefing Bootcamp', '4', 'Bootcamp', '1');
+INSERT INTO master.route_actions (roac_id, roac_name, roac_orderby, roac_module_name, roac_display) VALUES ('5', 'Join Bootcamp', '5', 'Bootcamp', '1');
+INSERT INTO master.route_actions (roac_id, roac_name, roac_orderby, roac_module_name, roac_display) VALUES ('6', 'Get Certified', '6', 'Bootcamp', '1');
+INSERT INTO master.route_actions (roac_id, roac_name, roac_orderby, roac_module_name, roac_display) VALUES ('7', 'Placement', '7', 'Bootcamp', '1');
+INSERT INTO master.route_actions (roac_id, roac_name, roac_orderby, roac_module_name, roac_display) VALUES ('8', 'Idle', '8', 'Bootcamp', '0');
+INSERT INTO master.route_actions (roac_id, roac_name, roac_orderby, roac_module_name, roac_display) VALUES ('9', 'Drop Out', '9', 'Bootcamp', '0');
+INSERT INTO master.route_actions (roac_id, roac_name, roac_orderby, roac_module_name, roac_display) VALUES ('10', 'Apply Application', '1', 'Job', '1');
+INSERT INTO master.route_actions (roac_id, roac_name, roac_orderby, roac_module_name, roac_display) VALUES ('11', 'Interview', '2', 'Job', '1');
+INSERT INTO master.route_actions (roac_id, roac_name, roac_orderby, roac_module_name, roac_display) VALUES ('12', 'Contract Legal', '3', 'Job', '1');
+INSERT INTO master.route_actions (roac_id, roac_name, roac_orderby, roac_module_name, roac_display) VALUES ('14', 'Placement', '4', 'Job', '1');
+
+select * from master.route_actions
+
+
+INSERT INTO master.status (status, status_module) VALUES ('certified', 'User');
+INSERT INTO master.status (status, status_module) VALUES ('voluntering', 'User');
+INSERT INTO master.status (status, status_module) VALUES ('organization', 'User');
+INSERT INTO master.status (status, status_module) VALUES ('reward', 'User');
+INSERT INTO master.status (status, status_module) VALUES ('fulltime', 'User');
+INSERT INTO master.status (status, status_module) VALUES ('freelance', 'User');
+INSERT INTO master.status (status, status_module) VALUES ('bachelor', 'User');
+INSERT INTO master.status (status, status_module) VALUES ('diploma', 'User');
+INSERT INTO master.status (status, status_module) VALUES ('Male', 'HR');
+INSERT INTO master.status (status, status_module) VALUES ('Female', 'HR');
+INSERT INTO master.status (status, status_module) VALUES ('Single', 'HR');
+INSERT INTO master.status (status, status_module) VALUES ('Married', 'HR');
+INSERT INTO master.status (status, status_module) VALUES ('Hourly', 'HR');
+INSERT INTO master.status (status, status_module) VALUES ('Salaried', 'HR');
+INSERT INTO master.status (status, status_module) VALUES ('Active', 'HR');
+INSERT INTO master.status (status, status_module) VALUES ('InActive', 'HR');
+INSERT INTO master.status (status, status_module) VALUES ('Contract', 'HR');
+INSERT INTO master.status (status, status_module) VALUES ('Prohibation', 'HR');
+INSERT INTO master.status (status, status_module) VALUES ('Monthly', 'HR');
+INSERT INTO master.status (status, status_module) VALUES ('Weekly', 'HR');
+INSERT INTO master.status (status, status_module) VALUES ('Bootcamp', 'Course');
+INSERT INTO master.status (status, status_module) VALUES ('Course', 'Course');
+INSERT INTO master.status (status, status_module) VALUES ('Online', 'Course');
+INSERT INTO master.status (status, status_module) VALUES ('Offline', 'Course');
+INSERT INTO master.status (status, status_module) VALUES ('English', 'Course');
+INSERT INTO master.status (status, status_module) VALUES ('Bahasa', 'Course');
+INSERT INTO master.status (status, status_module) VALUES ('Open', 'Bootcamp');
+INSERT INTO master.status (status, status_module) VALUES ('Running', 'Bootcamp');
+INSERT INTO master.status (status, status_module) VALUES ('Close', 'Bootcamp');
+INSERT INTO master.status (status, status_module) VALUES ('Pending', 'Bootcamp');
+INSERT INTO master.status (status, status_module) VALUES ('Extend', 'Bootcamp');
+INSERT INTO master.status (status, status_module) VALUES ('Passed', 'Bootcamp');
+INSERT INTO master.status (status, status_module) VALUES ('Failed', 'Bootcamp');
+INSERT INTO master.status (status, status_module) VALUES ('Resign', 'Bootcamp');
+INSERT INTO master.status (status, status_module) VALUES ('Publish', 'Job');
+INSERT INTO master.status (status, status_module) VALUES ('Draft', 'Job');
+INSERT INTO master.status (status, status_module) VALUES ('Cancel', 'Job');
+INSERT INTO master.status (status, status_module) VALUES ('Remove', 'Job');
+INSERT INTO master.status (status, status_module) VALUES ('Waiting', 'Job');
+INSERT INTO master.status (status, status_module) VALUES ('Done', 'Job');
+INSERT INTO master.status (status, status_module) VALUES ('New', 'Sales');
+INSERT INTO master.status (status, status_module) VALUES ('Shipping', 'Sales');
+INSERT INTO master.status (status, status_module) VALUES ('Cancelled', 'Sales');
+INSERT INTO master.status (status, status_module) VALUES ('Refunds', 'Sales');
+INSERT INTO master.status (status, status_module) VALUES ('Closed', 'Sales');
+INSERT INTO master.status (status, status_module) VALUES ('TopUp', 'Payment');
+INSERT INTO master.status (status, status_module) VALUES ('Transfer', 'Payment');
+INSERT INTO master.status (status, status_module) VALUES ('PayOrder', 'Payment');
+INSERT INTO master.status (status, status_module) VALUES ('Refund', 'Payment');
+INSERT INTO master.status (status, status_module) VALUES ('Debit', 'Payment');
+INSERT INTO master.status (status, status_module) VALUES ('Credit', 'Payment');
+INSERT INTO master.status (status, status_module) VALUES ('Payment', 'Payment');
+INSERT INTO master.status (status, status_module) VALUES ('Internal', 'User');
+INSERT INTO master.status (status, status_module) VALUES ('External', 'User');
+INSERT INTO master.status (status, status_module) VALUES ('Outsource', 'User');
+
+select * from master.status
+
+INSERT INTO master.address_type (adty_id, adty_name) VALUES ('1', 'Home');
+INSERT INTO master.address_type (adty_id, adty_name) VALUES ('2', 'Main Office');
+INSERT INTO master.address_type (adty_id, adty_name) VALUES ('3', 'Primary');
+INSERT INTO master.address_type (adty_id, adty_name) VALUES ('4', 'Shipping');
+INSERT INTO master.address_type (adty_id, adty_name) VALUES ('5', 'Billing');
+INSERT INTO master.address_type (adty_id, adty_name) VALUES ('6', 'Archive');
+
+select * from master.address_type
+
+INSERT INTO master.country (country_code, country_name) VALUES ('IND', 'Indonesia');
+
+select * from master.country
+
+INSERT INTO master.province (prov_id, prov_name, prov_country_code) VALUES ('1', 'DKI Jakarta', 'IND');
+INSERT INTO master.province (prov_id, prov_name, prov_country_code) VALUES ('2', 'Jawa Barat', 'IND');
+
+select * from master.province
+
+INSERT INTO master.city (city_id, city_name, city_prov_id) VALUES ('1', 'Bandung', '2');
+INSERT INTO master.city (city_id, city_name, city_prov_id) VALUES ('2', 'Bogor', '2');
+INSERT INTO master.city (city_id, city_name, city_prov_id) VALUES ('3', 'Jakarta', '1');
+
+select * from master.city
+
+INSERT INTO master.address (addr_id, addr_line1, addr_line2, addr_postal_code, addr_spatial_location, addr_city_id) VALUES ('1', 'jl. Sambiloto no 20, sumur batu, babakan madang', '-', '56789', '{}', '2');
+INSERT INTO master.address (addr_id, addr_line1, addr_line2, addr_postal_code, addr_spatial_location, addr_city_id) VALUES ('2', 'jl. North ridge no 18, sukajaya, babakan madang', '', '67859', '{}', '2');
+
+select * from master.adrress
+
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('1', 'Fundamental', 'Minggu pertama kamu akan belajar fundamental c#, mulai dari tipe data, variable, array, condition, iteration dan collection', '1', '1', 'javascript', null);
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('2', 'Data Type', '', '1', '2', 'javascript', '1');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('3', 'Scoping Variable', '', '1', '3', 'javascript', '1');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('4', 'Arrays', '', '1', '4', 'javascript', '1');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('5', 'Control Statement', '', '1', '5', 'javascript', '1');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('6', 'Iteration', '', '1', '6', 'javascript', '1');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('7', 'Collections', '', '1', '7', 'javascript', '1');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('8', 'Quiz', '', '1', '7', 'javascript', '1');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('9', 'Object Oriented Programming', 'OOP wajib kalian kuasain karena OOP akan membantu kita ketika kita develop application yang sangat komplek', '2', '1', 'javascript', null);
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('10', 'Encapsulation', '', '2', '2', 'javascript', '9');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('11', 'Inheritance', '', '2', '3', 'javascript', '9');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('12', 'Abstraction', '', '2', '4', 'javascript', '9');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('13', 'Polymorphism', '', '2', '5', 'javascript', '9');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('14', 'Design Pattern', '', '2', '6', 'javascript', '9');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('15', 'Quiz', '', '2', '2', 'javascript', '9');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('16', 'Database', '', '3', '2', 'javascript', null);
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('17', 'Create Database', '', '3', '3', 'javascript', '16');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('18', 'DDL', '', '3', '4', 'javascript', '16');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('19', 'DML', '', '3', '5', 'javascript', '16');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('20', 'Back End', '', '4', '1', 'javascript', null);
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('21', 'NodeJS', '', '4', '2', 'javascript', '20');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('22', 'RestAPI', '', '4', '3', 'javascript', '20');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('23', 'ORM Sequelize', '', '4', '4', 'javascript', '20');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('24', 'First Project', '', '4', '5', 'javascript', '20');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('25', 'Front End', '', '5', '1', 'javascript', null);
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('26', 'HTML & CSS', '', '5', '2', 'javascript', '25');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('27', 'ReactJS', '', '5', '3', 'javascript', '25');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('28', 'Redux', '', '5', '4', 'javascript', '25');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('29', 'GraphQL', '', '5', '5', 'javascript', '25');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('30', 'Microservices', '', '6', '1', 'javascript', null);
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('31', 'Docker', '', '6', '2', 'javascript', '30');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('32', 'Kubernates', '', '6', '3', 'javascript', '30');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('33', 'Kafka', '', '6', '4', 'javascript', '30');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('34', 'Mini Project', '', '7', '1', 'javascript', null);
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('35', 'Revamp CodeAcademy', '', '7', '2', 'javascript', '34');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('36', 'Back End', '', '8', '3', 'javascript', '34');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('37', 'Front End', '', '9', '4', 'javascript', '34');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('38', 'Presentation', '', '10', '5', 'javascript', '34');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('39', 'Softskill', '', '11', '1', 'softskill', null);
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('40', 'Learning', '', '11', '2', 'softskill', '39');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('41', 'Disicpline', '', '11', '3', 'softskill', '39');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('42', 'Persistence', '', '11', '4', 'softskill', '39');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('43', 'Problem Solving', '', '11', '5', 'softskill', '39');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('44', 'Communication', '', '11', '6', 'softskill', '39');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('45', 'TeamWork', '', '11', '7', 'softskill', '39');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('46', 'Final Evaluation', '', '12', '1', 'Final', null);
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('47', 'Struktur programming language', '', '12', '2', 'Final', '46');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('48', 'Logika', '', '12', '3', 'Final', '46');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('49', 'OOP', '', '12', '4', 'Final', '46');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('50', 'Database', '', '12', '5', 'Final', '46');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('51', 'Webservices', '', '12', '6', 'Final', '46');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('52', 'Microservices', '', '12', '7', 'Final', '46');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('53', 'Tugas Harian', '', '12', '8', 'Final', '46');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('54', 'Presentation', '', '12', '1', 'Presentation', null);
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('55', 'Business Process', '', '12', '2', 'Presentation', '54');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('56', 'Performance', '', '12', '3', 'Presentation', '54');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('57', 'Media Material', '', '12', '4', 'Presentation', '54');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('58', 'Logic & Technical', '', '12', '5', 'Presentation', '54');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('59', 'Knowledge', '', '12', '6', 'Presentation', '54');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('60', 'Technical', '', '12', '1', 'Technical', null);
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('61', 'Fundamental & Logic', '', '12', '2', 'Technical', '60');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('62', 'OOP', '', '12', '3', 'Technical', '60');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('63', 'Database DDL & DDL', '', '12', '4', 'Technical', '60');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('64', 'Project', '', '12', '5', 'Technical', '60');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('65', 'Webservices', '', '12', '6', 'Technical', '60');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('66', 'Microservices', '', '12', '7', 'Technical', '60');
+INSERT INTO master.skill_template (skte_id, skte_skill, skte_description, skte_week, skte_orderby, skty_name, skte_skte_id) VALUES ('67', 'Deployment', '', '12', '8', 'Technical', '60');
+
+select * from master.skill
+
+INSERT INTO master.job_type (joty_id, joty_name) VALUES ('1', 'Magang');
+INSERT INTO master.job_type (joty_id, joty_name) VALUES ('2', 'Full-Time');
+INSERT INTO master.job_type (joty_id, joty_name) VALUES ('3', 'Part-Time');
+INSERT INTO master.job_type (joty_id, joty_name) VALUES ('4', 'Freelance');
+INSERT INTO master.job_type (joty_id, joty_name) VALUES ('5', 'Contract');
+INSERT INTO master.job_type (joty_id, joty_name) VALUES ('6', 'Prohibation');
+
+select * from master.job_type
+
 
 -- USER
 
 create table users.business_entity(
 	entity_id serial primary key
 );
+
 create table users.roles(
     role_id serial Primary Key,
-    role_name varchar(35) unique,
+    role_name varchar(35),
     role_type varchar(15),
     role_modified_date timestamp
 );
@@ -140,11 +371,12 @@ create table users.users(
     user_last_name VARCHAR(50),
     user_birth_date TIMESTAMP,
     user_email_promotion INTEGER,
-    user_demographic VARCHAR,
+    user_demographic JSON,
     user_modified_date TIMESTAMP,
     user_photo VARCHAR(255),
     user_current_role INTEGER,
-    FOREIGN KEY (user_entity_id) REFERENCES users.business_entity (entity_id)
+    FOREIGN KEY (user_entity_id) REFERENCES users.business_entity (entity_id),
+    FOREIGN KEY (user_current_role) REFERENCES users.roles(role_id)
 );
 ALTER TABLE users.users
 	add constraint fk_user_current_role foreign key(user_current_role) 
@@ -219,7 +451,7 @@ CREATE TABLE users.users_media(
     FOREIGN KEY (usme_entity_id) REFERENCES users.users (user_entity_id)
 );
 
-CREATE TABLE users.users_eductaion(
+CREATE TABLE users.users_education(
     usdu_id SERIAL,
     usdu_entity_id INTEGER,
     usdu_school VARCHAR(255),
@@ -260,6 +492,106 @@ CREATE TABLE users.users_address (
     FOREIGN KEY (etad_entity_id) REFERENCES users.users (user_entity_id),
     FOREIGN KEY (etad_adty_id) REFERENCES master.address_type (adty_id)
 );
+
+-- INSERT USERS
+INSERT INTO users.business_entity 
+VALUES 
+(1),
+(2),
+(3),
+(4),
+(5),
+(6),
+(7),
+(8),
+(9)
+
+INSERT INTO users.roles (role_id, role_name, role_type)
+VALUES 
+(1, 'Candidat', 'External'),
+(2, 'Candidat', 'External'),
+(3, 'Recruiter', 'Internal'),
+(4, 'Instructor', 'Internal'),
+(5, 'Sales', 'Internal'),
+(6, 'Manager', 'Internal'),
+(7, 'Vice President', 'Internal'),
+(8, 'Account Manager', 'Internal'),
+(9, 'Student', 'External'),
+(10, 'Administrator', 'Internal'),
+(11, 'Outsource', 'Internal'),
+(12, 'Employee', 'Internal')
+
+INSERT INTO users.users (user_entity_id, user_name, user_password, user_first_name, user_last_name, user_email_promotion, user_demographic, user_photo, user_current_role)
+VALUES
+(1, 'kangdian', 'yadfaldjfapdjf;ajfpasdf', 'kang', 'dian', 1, '{"latitude":12.90,"longitude":-99.989}', 'photo.png', 4),
+(2, 'nofal', 'ajdfja;dfpadjfadf', 'nofal', 'firdaus', 0, '{"latitude":12.90,"longitude":-99.989}', 'nofal.png', 4),
+(3, 'abdul101', 'ajdfja;dfpadjfadf', 'Abdul', 'Razaq', 1, '{"latitude":12.90,"longitude":-99.989}', 'abdul.png', 1),
+(4, 'ratih', 'yadlfjadjfa', 'ratih wina', 'ludwig', 0, '{"latitude":12.90,"longitude":-99.989}', 'ratih.png', 11),
+(5, 'eka', 'ynyaldjf;adfadfad;faldfsa', 'Eka', 'Nugroho', 0, '{"latitude":12.90,"longitude":-99.989}', 'eka.png', 8),
+(6, 'novia', 'lajdfljaljdfajdf;a', 'novia', 'slebew', 1, '{"latitude":12.90,"longitude":-99.989}', 'novia.png', 9),
+(7, 'novelina', 'lkadjfajdf;adf', 'novelina', 'lina', 0, '{"latitude":12.90,"longitude":-99.989}', 'lina.png', 3),
+(8, 'yugo', 'aldjfadfa;dfjlajdf;a', 'yugo', 'ardan', 1, '{"latitude":12.90,"longitude":-99.989}', 'yugo.png', 1),
+(9, 'andhika', 'ladfljafjadfas;f', 'andhika', 'pratama', 1, '{"latitude":12.90,"longitude":-99.989}', 'andhika.png', 2)
+
+INSERT INTO users.users_roles (usro_entity_id, usro_role_id)
+VALUES
+(1, 1),
+(2, 1),
+(3, 3),
+(4, 5)
+
+
+INSERT INTO users.phone_number_type (ponty_code)
+VALUES
+('Home'),
+('Cell')
+
+INSERT INTO users.users_phones (uspo_entity_id, uspo_number, uspo_ponty_code)
+VALUES
+(1, '8139809091', 'Cell'),
+(1, '022-7890987', 'Home'),
+(2, '089898989', 'Cell')
+
+INSERT INTO users.users_address (etad_addr_id, etad_entity_id, etad_adty_id)
+VALUES
+(1, 1, 1),
+(2, 2, 2)
+
+INSERT INTO users.users_email (pmail_entity_id, pmail_address)
+VALUES 
+(1, 'dian@code.id'),
+(1, 'dian@gmail.com'),
+(2, 'nofal@code.id')
+
+INSERT INTO users.users_media ( usme_entity_id, usme_file_link, usme_filename, usme_filesize, usme_filetype, usme_note)
+VALUES
+(1, 'https://', 'ijazah.png', 2345, 'jpg', 'ijazah'),
+(1, 'https://', 'cv.docx', 1890, 'word', 'cv')
+
+INSERT INTO users.users_education (usdu_entity_id, usdu_school, usdu_degree, usdu_field_study, usdu_start_date, usdu_end_date, usdu_grade, usdu_activities)
+VALUES
+(1, 'MIT', 'Bachelor', 'Informatic', '2000-07-12', '2005-08-12', 3.45, 'im bachelor with cumlaude')
+
+INSERT INTO users.users_experiences (usex_entity_id, usex_title, usex_profile_headline, usex_employment_type, usex_company_name, usex_is_current, usex_start_date, usex_end_date, usex_industry, usex_description, usex_experience_type, usex_city_id)
+VALUES
+(1, 'Head Of Bootcamp','Software Engineer', 'fulltime', 'Code.id', '1', '2019-07-12', '2020-07-12', 'Consultant IT', 'i bleieve...', 'company', 1),
+(1, 'Motivator','Act of Volunteer', 'freelance', 'Government', '0', '2019-07-12', '2020-07-12', 'Government', 'Helping people to Learn', 'voluntering', 1)
+ALTER SEQUENCE users.users_experiences_usex_id_seq RESTART WITH 1;
+
+
+INSERT INTO users.users_experiences_skill (uesk_usex_id, uesk_uski_id)
+VALUES
+(1, 1),
+(1, 2),
+(1, 3)
+
+INSERT INTO users.users_skill (uski_entity_id, uski_skty_name)
+VALUES
+(1, 'java'),
+(1, 'dotnet'),
+(2, 'javascript')
+
+
 
 -- HR
 -- CREATE SCHEMA HR
@@ -392,6 +724,35 @@ CREATE TABLE hr.employee_pay_history(
 	foreign key (ephi_entity_id) references hr.employee(emp_entity_id)
 );
 
+-- INSERT HR
+INSERT INTO  hr.employee (emp_entity_id, emp_emp_number, emp_national_id, emp_birth_date, emp_marital_status, emp_gender, emp_hire_date, emp_salaried_flag, emp_vacation_hours, emp_sickleave_hours, emp_current_flag, emp_type, emp_joro_id)
+VALUES
+(1, 202207001, 13419981009004, '1998-03-12', 'M', 'M','2020-01-10', '1', 12, 12, 1, 'Internal', 1),
+(4, 202207002, 13420021009004, '2002-01-12', 'S', 'F','2020-01-11', '1', 12, 12, 1, 'Outsource', 1),
+(5, 202205001, 13419771009005, '1977-01-12', 'M', 'M','2020-01-12', '1', 12, 12, 1, 'Internal', 1),
+(7, 202205035, 13419771009006, '1998-03-12', 'S', 'F','2020-01-13', '1', 12, 12, 1, 'Outsource', 1);
+
+INSERT INTO hr.employee_client_contract (ecco_entity_id, ecco_contract_no, ecco_contract_date, ecco_start_date, ecco_end_date, ecco_notes, ecco_media_link, ecco_joty_id, ecco_account_manager, ecco_clit_id, ecco_status) 
+VALUES
+(4, '002/HR-CODE.ID/PKWTT/I/2022', '2022-06-13', '2022-06-13', '2023-06-13', 'Karyawan Outsource', 'https://codeacademy/assets/contract.pdf', 1, 5, 1, 'Contract');
+
+INSERT INTO hr.department (dept_name)
+VALUES
+('Development'),
+('Sales'),
+('Bootcamp Academy');
+
+INSERT INTO hr.employee_department_history (edhi_entity_id, edhi_start_date, edhi_end_date, edhi_dept_id)
+VALUES
+(1, '2019-07-12', '2020-07-12', 1),
+(4, '2020-07-12', '2021-07-12', 3);
+
+INSERT INTO hr.employee_pay_history (ephi_entity_id, ephi_rate_change_date, ephi_rate_salary, ephi_pay_frequence)
+VALUES
+(1,'2019-07-12', 6000000, 1),
+(4,'2020-07-12', 7000000, 1);
+
+
 -- JOBHIRE
 CREATE SCHEMA jobhire
 
@@ -501,6 +862,42 @@ create table jobHire.talent_apply_progress(
 	CONSTRAINT talentprogress PRIMARY KEY (tapr_id, taap_user_entity_id, taap_entity_id)
 );
 
+
+-- INSERT JOBHIRE
+INSERT INTO jobhire.job_category (joca_id, joca_name) 
+	VALUES 
+		(1, 'Software Engineer'),
+		(2, 'Business Development'),
+		(3, 'Marketing'),
+		(4, 'Operations')
+
+INSERT INTO jobHire.client (clit_id, clit_name, clit_about, clit_addr_id, clit_emra_id)
+	VALUES
+		(1, 'Code ID', 'CODE.ID is a software development service company that focuses on helping clients turn their best ideas into a product, application, or website.',null,null),
+		(2, 'Telkomsel', 'adalah operator telekomunikasi seluler pertama di Indonesia yang berbasis teknologi jaringan GSM Dual Band (900 & 1800), GPRS, WiFi, EDGE, 3G, HSDPA dan HSPA di seluruh Indonesia',null,null),
+		(3, 'Astra Internasional', 'PT Astra International Tbk. (IDX: ASII) adalah sebuah konglomerat multinasional yang berkantor pusat di Jakarta, Indonesia',null,null);
+		
+INSERT INTO jobhire.job_post (jopo_entity_id, jopo_number,jopo_title, jopo_min_salary,  jopo_max_salary ,jopo_start_date, jopo_end_date, jopo_emp_entity_id, jopo_clit_id ,jopo_joro_id, jopo_joty_id, jopo_joca_id, jopo_status, jopo_min_experience, jopo_max_experience,  jopo_primary_skill  )
+	VALUES
+		(1,'JOB20220727-0001', 'Java Developer', 9000000, 16000000, '12-07-2022', '12-08-2022', 7 , 3, 1, 5, 1, 'publish', 1, 3, 'java,sql')
+		
+		
+INSERT INTO jobhire.talent_apply(taap_user_entity_id, taap_entity_id, taap_intro, taap_scoring, taap_modified_date, taap_status)
+	VALUES
+		(1, 1, 'Perkenalkan nama saya andhika, saya data scienties anthusias', 8, '2022-07-12', 'Interview')
+
+INSERT INTO jobHire.talent_apply_progress(tapr_id, taap_user_entity_id, taap_entity_id, tapr_modified_date, tapr_status)
+	VALUES
+		(1, 1, 1, '2022-07-15', 'done'),
+		(2, 1, 1, '2022-07-15', 'done'),
+		(3, 1, 1, '2022-07-18', 'waiting'),
+		(4, 1, 1, '2022-07-18', 'waiting');
+
+INSERT INTO jobhire.job_post_desc (jopo_entity_id)
+	VALUES
+		(1)
+		
+
 -- CURRICULUM
 create schema curriculum;
 
@@ -586,6 +983,66 @@ create table curriculum.section_detail_material(
 	sedm_secd_id integer,
 	foreign key (sedm_secd_id) references curriculum.section_detail (secd_id)
 );
+
+
+-- INSERT CURRICULUM
+insert into curriculum.program_entity (prog_entity_id, prog_title, prog_headline, prog_type, prog_learning_type, prog_rating, prog_total_trainee, prog_image, prog_best_seller, prog_price, prog_language, prog_modified_date, prog_duration, prog_duration_type, prog_tag_skill, prog_city_id, prog_cate_id, prog_created_by, prog_status) values
+(1, 'Javascript Fullstack From Zero To Expert', 'Modern javascript for everyone with projects, challenge and theory. More Course in one !', 'course', 'online', null, null, 'javascript.png', null, 750.000, 'bahasa', null, null, null, null, 1, 2, null, 'publish' ),
+(2, 'Java Technology', 'Join bootcamp and become java developer', 'bootcamp', 'online', null, null, 'java.png', null, null, null, null, null, null, null, 2, 3, null, null ),
+(3, 'Golang', 'Develop application with golang', 'course', 'online', null, null, null, null, null, null, null, null, null, null, null, 4, null, null )
+
+insert into curriculum.program_entity_description (pred_prog_entity_id, pred_item_learning, pred_item_include, pred_requirement, pred_description, pred_target_level) values
+( 1,
+    '{"items" : [
+        "Become an advanced, confident, and modern JavaScript developer from scratch",
+        "Become job-ready by understanding how JavaScript really works behind the scenes",
+        "JavaScript fundamentals: variables, if/else, operators, boolean logic, functions, arrays, objects, loops, strings, etc."
+    ]}',
+    '{"items" : [
+        {"value" : "69 hours on-demand video", "icon" : "video"},
+        {"value" : "22 articles", "icon" : "list"},
+        {"value" : "18 downloadable resources", "icon" : "download"},
+        {"value" : "Full lifetime access", "icon" : "infinite"},
+        {"value" : "Access on mobile and TV", "icon" : "phone"},
+        {"value" : "Certificate of completion", "icon" : "reward"}
+    ]}',
+    '{"items" : [
+        "No coding experience is necessary to take this course! I take you from beginner to expert!",
+        "Any computer and OS will work — Windows, macOS or Linux. We will set up your text editor in the course.",
+        "A basic understanding of HTML and CSS is a plus, but not a must! The course includes an HTML and CSS crash course."
+    ]}',
+    '{"items" : "JavaScript is the most popular programming language in the world. It powers the entire modern web. It provides millions of high-paying jobs all over the world."}',
+    '{"items" : "Take this course if you want to gain a true and deep understanding of JavaScript"}'
+);
+
+insert into curriculum.program_reviews (prow_user_entity_id,prow_prog_entity_id,prow_review,prow_rating,prow_modified_date)
+values
+(1,1,'Course javascript sangat comprehensif, mudah diikutin, trainer sangat menguasai materi',4,'2023-02-23'),
+(2,2,'Very good, has allowed me to grasp the basic syntax and structure of Golang. Also provides effective challenges.',7,'2023-05-30'),
+(3,3,'we going to practice variables and strings in JavaScript so you can hone your skills and feel confident taking them to the real world.',5,'2023-03-12')
+
+select * from curriculum.program_reviews
+
+insert into curriculum.sections (sect_prog_entity_id,sect_title,sect_description,sect_total_section,sect_total_lecture,sect_total_minute,sect_modified_date)
+values
+(1,'Javascript Fundamental',null,12,5,60,'2022-08-01'),
+(1,'Iteration',null,23,8,120,'2022-03-10'),
+(1,'Data Structure',null,8,7,80,'2023-01-15')
+
+select * from curriculum.sections
+	
+insert into curriculum.section_detail (secd_title,secd_preview,secd_score,secd_note,secd_minute,secd_modified_date)
+values
+('Course Structure And Project',1,7,'you will learning how to create new project',185,'2023-03-23'),
+('Setting up Visual Code',1,9,null,75,'2023-05-15')
+
+select * from curriculum.section_detail
+
+insert into curriculum.section_detail_material (sedm_filename,sedm_filesize,sedm_filetype,sedm_filelink,sedm_modified_date,sedm_secd_id)
+values
+('video1.mp4',12345,'video','https://codeacademy/assets','2023-01-23',1),
+('video2.mp4',2435,'video','https://codeacademy/assets/gol','2023-01-23',2)
+
 
 -- BOOTCAMP
 CREATE TABLE bootcamp.program_apply (
@@ -686,6 +1143,63 @@ CREATE TABLE bootcamp.instructor_programs (
     CONSTRAINT instructor_programs_pk PRIMARY KEY (batch_id, inpro_entity_id, inpro_emp_entity_id)
 );
 
+-- INSERT BOOTCAMP
+-- Insert data into program_apply table
+INSERT INTO bootcamp.program_apply (prap_user_entity_id, prap_prog_entity_id, prap_test_score, prap_gpa, prap_iq_test, prap_review, prap_modified_date, prap_status) 
+VALUES 
+(2, 3, 75, NULL, 88, 'Personality ok, antusias, komunikasi bagus', '2023-07-06', 'recommended'),
+(2, 1, 88, NULL, 88, 'Nice', '2023-07-06', 'passed');
+
+select * from bootcamp.program_apply
+
+-- Insert data into program_apply_progress table
+INSERT INTO bootcamp.program_apply_progress (parog_id, parog_user_entity_id, parog_prog_entity_id, parog_action_date, parog_modified_date, parog_comment, parog_progress_name, parog_emp_entity_id, parog_status) 
+VALUES 
+(1, 2, 3, '2023-07-06', '2023-07-06', NULL, 'done', NULL, NULL),
+(2, 2, 3, '2023-07-06', '2023-07-06', NULL, 'done', NULL, NULL),
+(3, 2, 3, '2023-07-06', '2023-07-06', NULL, 'done', NULL, NULL),
+(4, 2, 3, '2023-07-06', '2023-07-06', NULL, 'done', NULL, NULL),
+(5, 2, 3, '2023-07-06', '2023-07-06', 'join bootcamp available di minggu ke 2 dari jadwal', 'done', NULL, NULL),
+(6, 2, 3, '2023-07-06', '2023-07-06', NULL, 'done', NULL, NULL),
+(7, 2, 3, '2023-07-06', '2023-07-06', NULL, 'done', NULL, NULL);
+
+select * from bootcamp.program_apply_progress 
+
+-- Insert data into batch table
+INSERT INTO bootcamp.batch (batch_id, batch_entity_id, batch_name, batch_description, batch_start_date, batch_end_date, batch_reason, batch_type, batch_modified_date, batch_status, batch_pic_id) 
+VALUES 
+(1, 2, 'Batch#15', NULL, '2022-08-12', '2022-10-12', NULL, 'offline', '2023-07-06', 'New', NULL);
+
+select * from bootcamp.batch
+
+-- Insert data into batch_trainee table
+INSERT INTO bootcamp.batch_trainee (batr_id, batr_status, batr_certificated, batre_certificate_link, batr_access_token, batr_access_grant, batr_review, batr_total_score, batr_modified_date, batr_trainee_entity_id, batr_batch_id)
+VALUES 
+(1, 'running', '0', NULL, NULL, '0', 'selama bootcamp ok nice', 88, '2023-07-06', 3, 1),
+(2, 'running', '0', NULL, NULL, '0', 'selama bootcamp ok nice', 86, '2023-07-06', 1, 1);
+
+select * from bootcamp.batch_trainee
+
+-- Insert data into batch_trainee_evaluation table
+INSERT INTO bootcamp.batch_trainee_evaluation (btev_id, btev_type, btev_header, btev_section, btev_skill, btev_week, btev_skor, btev_note, btev_modified_date, btev_batch_id, btev_trainee_entity_id)
+VALUES 
+(1, 'hardskill', 'Fundamental', NULL, 'Database', 1, 4, NULL, '2023-07-06', 1, 3),
+(2, 'softskill', 'Fundamental', NULL, 'Database', 2, 4, NULL, '2023-07-06', 1, 3),
+(3, 'hardskill', 'Fundamental', NULL, 'OOP', 3, 3, NULL, '2023-07-06', 1, 3),
+(4, 'softskill', NULL, NULL, 'Dicipline', 4, 4, NULL, '2023-07-06', 1, 3);
+
+select * from bootcamp.batch_trainee_evaluation 
+
+-- Insert data into instructor_programs table
+INSERT INTO bootcamp.instructor_programs (batch_id, inpro_entity_id, inpro_emp_entity_id, inpro_modified_date) 
+VALUES 
+(1, 2, 1, NULL),
+(1, 2, 4, NULL);
+
+select * from bootcamp.instructor_programs
+
+
+
 -- SALES
 create table sales.special_offer (
 	spof_id serial primary key ,
@@ -754,6 +1268,30 @@ create table sales.sales_order_detail (
 	foreign key (sode_sohe_id) references sales.sales_order_header (sohe_id),
 	FOREIGN KEY (sode_prog_entity_id) REFERENCES curriculum.program_entity (prog_entity_id)
 );
+
+
+-- INSERT SALES
+INSERT INTO sales.special_offer (spof_id, spof_description, spof_discount, spof_start_date,spof_end_date,spof_min_qty,spof_max_qty, spof_cate_id)
+VALUES (1, 'Dapatkan discount 50%, untuk 5 orang', 50,'2022-10-27', '2022-07-27', 1, 5, 1);
+
+INSERT INTO sales.special_offer_programs (soco_spof_id, soco_prog_entity_id )
+VALUES (1, 1),
+       (1, 3);
+
+INSERT INTO sales.cart_items (cait_id, cait_quantity, cait_user_entity_id, cait_prog_entity_id)
+VALUES (1, 1, 3, 1),
+       (2, 1, 3, 3);
+
+INSERT INTO sales.sales_order_header (sohe_id, sohe_order_date, sohe_due_date, sohe_ship_date,sohe_order_number,sohe_account_number,sohe_subtotal, sohe_tax, sohe_total_due, sohe_status)
+VALUES (1, '2022-06-22', '2022-06-30',  '2022-06-28', 'ORD#20220727-0000001', 131899555, 0, 50000, 1, 'Closed');
+
+
+INSERT INTO sales.sales_order_detail (sode_id, sode_qty, sode_unit_price, sode_unit_discount,sode_line_total,sode_sohe_id,sode_prog_entity_id)
+VALUES (1, 1, 100000, 50, 50000, 1, 1);
+       
+
+
+
 
 -- PAYMENT
 CREATE TABLE payment.bank (
@@ -855,3 +1393,29 @@ CREATE TRIGGER trigger_set_trpa_code_and_ids
 	BEFORE INSERT ON payment.transaction_payment
 	FOR EACH ROW
 	EXECUTE FUNCTION set_trpa_code_number();
+
+
+-- INSERT PAYMENT
+INSERT INTO payment.bank (bank_entity_id, bank_code, bank_name) VALUES
+(6, 'BCA', 'Bank Central Asia'),
+(7, 'BNI', 'Bank Negara Indonesia'),
+(8, 'MAN', 'Bank Mandiri'),
+(9, 'JAGO', 'Bank Jago');
+SELECT * FROM payment.bank;
+
+INSERT INTO payment.fintech (fint_entity_id, fint_code, fint_name) VALUES
+(7, 'GOTO', 'Payment GoTo'),
+(8, 'OVO', 'OVO'),
+(9, 'SP', 'Shopee Paylater');
+SELECT * FROM payment.fintech;
+
+INSERT INTO payment.users_account (usac_bank_entity_id, usac_user_entity_id, usac_account_number, usac_saldo, usac_type, usac_status) VALUES
+(8, 3, 131899555, 100000, 'debit', 'active'),
+(9, 3, 087654321, 50000, 'payment', 'inactive');
+SELECT * FROM payment.users_account;
+
+INSERT INTO payment.transaction_payment (trpa_id, trpa_code_number, trpa_order_number, trpa_debit, trpa_credit, trpa_type, trpa_note, trpa_modified_date, trpa_source_id, trpa_target_id, trpa_user_entity_id) VALUES
+(1, 20220727#000001, null, 0,	50000, 'top-up', 'topup bank ke goto', null, 131899555, 087654321, 3),	
+(2,	20220727#000002, null, 50000,	0, 'top-up', 'receive topup', null, 087654321, 131899555, 3),
+(3,	20220727#000003, null, null, 10000, 'order', 'bayar shoppe order', null, 131899555, 99999, 3);
+SELECT * FROM payment.transaction_payment;
